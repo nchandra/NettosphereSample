@@ -1,0 +1,12 @@
+This application uses Nettoshpere (https://github.com/Atmosphere/nettosphere) and
+Atmosphere (https://github.com/Atmosphere/atmosphere) framework to create a simple 'server to client' websocket
+based streaming application. The server periodically broadcasts current time to all the connected clients.
+The server also echoes back any message the client sends to it.
+
+Running the application
+-----------------------
+
+Assuming the code has been compiled.
+1. Start server - Launch MyNettosphereServer
+2a. Start client - Launch TestNettosphereClient
+2b. For testing on a browser, open index.html in browser that support WebSocket e.g. Chrome and click on "Connect".
