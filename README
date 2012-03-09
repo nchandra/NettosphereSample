@@ -1,6 +1,4 @@
-This application uses Nettoshpere (https://github.com/Atmosphere/nettosphere) and
-Atmosphere (https://github.com/Atmosphere/atmosphere) framework to create a simple 'server to client' websocket
-based streaming application. The server periodically broadcasts current time to all the connected clients.
+This application uses Nettoshpere (https://github.com/Atmosphere/nettosphere) and Atmosphere (https://github.com/Atmosphere/atmosphere) framework to create a simple 'server to client' websocket based streaming application. The server periodically broadcasts current time to all the connected clients.
 The server also echoes back any message the client sends to it.
 
 Running the application
