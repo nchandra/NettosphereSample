@@ -7,10 +7,10 @@ Running the application
 If you are using Eclipse:
 1. Start server - Launch MyNettosphereServer
 2a. Start client - Launch TestNettosphereClient
-2b. For testing on a browser, open index.html in a browser that support WebSocket e.g. Chrome and click on "Connect".
+2b. For testing on a browser, open index.html in a browser that supports WebSocket e.g. Chrome and click on "Connect".
 
 If you are using Maven:
 1. mvn clean package
-1. Start server - java -jar target\NettosphereSample-1.0.jar
-2a. Start client - Launch TestNettosphereClient
-2b. For testing on a browser, open index.html in a browser that support WebSocket e.g. Chrome and click on "Connect".
+2. Start server - java -jar target\NettosphereSample-1.0.jar
+3a. Start client - Launch TestNettosphereClient
+3b. For testing on a browser, open index.html in a browser that supports WebSocket e.g. Chrome and click on "Connect".
