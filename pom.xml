@@ -1,148 +1,41 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
-	<groupId>NettosphereSample</groupId>
-	<artifactId>NettosphereSample</artifactId>
-	<version>1.0</version>
-	<name>NettosphereSample</name>
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>nettosphere-sample</groupId>
+    <artifactId>nettosphere-sample</artifactId>
+    <version>1.0</version>
+    <name>nettosphere-sample</name>
+    <packaging>pom</packaging>
 
-	<description>A sample project for getting started with Nettosphere. See https://github.com/Atmosphere/nettosphere</description>
-	<url>https://github.com/nchandra/NettosphereSample</url>
+    <description>A sample project for getting started with Nettosphere. See https://github.com/Atmosphere/nettosphere</description>
+    <url>https://github.com/nchandra/NettosphereSample</url>
+    <developers>
+        <developer>
+            <id>nchandra</id>
+            <name>Nishant Chandra</name>
+            <email>nishant.chandra@gmail.com</email>
+        </developer>
+    </developers>
+    <scm>
+        <url>https://github.com/nchandra/NettosphereSample</url>
+    </scm>
 
-	<developers>
-		<developer>
-			<id>nchandra</id>
-			<name>Nishant Chandra</name>
-			<email>nishant.chandra@gmail.com</email>
-		</developer>
-	</developers>
+    <repositories>
+        <repository>
+            <id>oss.sonatype.org</id>
+            <url>http://oss.sonatype.org/content/repositories/releases</url>
+        </repository>
+        <repository>
+            <id>oss.sonatype.org-snapshot</id>
+            <url>http://oss.sonatype.org/content/repositories/snapshots</url>
+        </repository>
+    </repositories>
 
-	<repositories>
-		<repository>
-			<id>oss.sonatype.org</id>
-			<url>http://oss.sonatype.org/content/repositories/releases</url>
-		</repository>
-		<repository>
-			<id>oss.sonatype.org-snapshot</id>
-			<url>http://oss.sonatype.org/content/repositories/snapshots</url>
-		</repository>
-	</repositories>
+    <modules>
+        <module>server</module>
+        <module>client</module>
+    </modules>
 
-	<scm>
-		<url>https://github.com/nchandra/NettosphereSample</url>
-	</scm>
-	<build>
-		<sourceDirectory>src</sourceDirectory>
-		<testSourceDirectory>test</testSourceDirectory>
-		<outputDirectory>target/classes</outputDirectory>
-		<testOutputDirectory>target/test-classes</testOutputDirectory>
-		<defaultGoal>install</defaultGoal>
-		<directory>target</directory>
-		<finalName>${artifactId}-${version}</finalName>
-		<resources>
-			<resource>
-				<directory>${project.basedir}\resources</directory>
-			</resource>
-			<resource>
-				<targetPath>${project.build.directory}\classes</targetPath>
-				<filtering>false</filtering>
-				<directory>${project.basedir}\src</directory>
-				<includes>
-					<include>*.properties</include>
-				</includes>
-			</resource>
-		</resources>
-
-		<plugins>
-			<plugin>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<phase>install</phase>
-						<goals>
-							<goal>copy-dependencies</goal>
-						</goals>
-						<configuration>
-							<outputDirectory>${project.build.directory}/lib</outputDirectory>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<configuration>
-					<archive>
-						<manifest>
-							<addClasspath>true</addClasspath>
-							<classpathPrefix>lib/</classpathPrefix>
-							<mainClass>com.atmosphere.nettosphere.sample.MyNettosphereServer</mainClass>
-							<useUniqueVersions>false</useUniqueVersions>
-						</manifest>
-					</archive>
-				</configuration>
-			</plugin>
-
-		</plugins>
-	</build>
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.10</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.netty</groupId>
-			<artifactId>netty</artifactId>
-			<version>3.3.1.Final</version>
-			<scope>compile</scope>
-		</dependency>
-
-		<!-- Atmosphere dependencies -->
-		<dependency>
-			<groupId>org.atmosphere</groupId>
-			<artifactId>nettosphere</artifactId>
-			<version>1.0.1-SNAPSHOT</version>
-		</dependency>
-
-		<!-- Atmosphere Test dependencies -->
-		<dependency>
-			<groupId>org.atmosphere</groupId>
-			<artifactId>atmosphere-jersey</artifactId>
-			<version>0.9-SNAPSHOT</version><!-- TODO: Update -->
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-core</artifactId>
-			<version>1.0.0</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>ch.qos.logback</groupId>
-			<artifactId>logback-classic</artifactId>
-			<version>1.0.0</version>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>com.ning</groupId>
-			<artifactId>async-http-client</artifactId>
-			<version>1.7.1</version>
-		</dependency>
-		<dependency>
-			<groupId>org.testng</groupId>
-			<artifactId>testng</artifactId>
-			<version>5.8</version>
-			<classifier>jdk15</classifier>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-log4j12</artifactId>
-			<version>1.6.4</version>
-			<type>jar</type>
-			<scope>compile</scope>
-		</dependency>
-	</dependencies>
 </project>
