@@ -88,6 +88,7 @@ public class MyNettosphereWebsocketHandler implements WebSocketProtocol {
                 .getPathInfo());
         r.setBroadcaster(b);
         r.addEventListener(new WebSocketEventListenerAdapter());
+        r.setSerializer(new MyNettosphereMessageSerializer());
 
         //Setup a broadcaster to periodically send current time to all connected clients.
         if (b.getAtmosphereResources().size() == 0) {
