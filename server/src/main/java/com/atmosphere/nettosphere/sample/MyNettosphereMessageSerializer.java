@@ -17,13 +17,11 @@ package com.atmosphere.nettosphere.sample;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.util.Map;
 
 import org.atmosphere.cpr.Serializer;
 
 public class MyNettosphereMessageSerializer implements Serializer {
 
-    @Override
     public void write(OutputStream os, Object o) throws IOException {
         if(o instanceof String){
             os.write(((String) o).getBytes());

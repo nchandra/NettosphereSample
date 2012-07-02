@@ -46,30 +46,25 @@ public class TestNettosphereClient {
 
         webSocket.addWebSocketListener(new WebSocketTextListener() {
 
-            @Override
             public void onMessage(String message) {
                 System.out.println("onMessage");
                 response.set(message);
                 l.countDown();
             }
 
-            @Override
             public void onFragment(String fragment, boolean last) {
                 System.out.println("onFragment");
             }
 
-            @Override
             public void onOpen(WebSocket websocket) {
                 System.out.println("onOpen");
             }
 
-            @Override
             public void onClose(WebSocket websocket) {
                 System.out.println("onClose");
                 l.countDown();
             }
 
-            @Override
             public void onError(Throwable t) {
                 System.out.println("onError");
                 l.countDown();

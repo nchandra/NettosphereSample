@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>nettosphere-sample</groupId>
     <artifactId>nettosphere-server-sample</artifactId>
-    <version>1.0</version>
+    <version>1.1</version>
     <name>nettosphere-server-sample</name>
 
     <!--<description>todo</description>-->
@@ -11,7 +11,7 @@
     <parent>
         <groupId>nettosphere-sample</groupId>
         <artifactId>nettosphere-sample</artifactId>
-        <version>1.0</version>
+        <version>1.1</version>
     </parent>
 
     <dependencies>
@@ -19,15 +19,14 @@
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty</artifactId>
-            <version>3.3.1.Final</version>
-            <scope>compile</scope>
+            <version>3.5.1.Final</version>
         </dependency>
 
         <!-- Atmosphere dependencies -->
         <dependency>
             <groupId>org.atmosphere</groupId>
             <artifactId>nettosphere</artifactId>
-            <version>1.0.1-SNAPSHOT</version>
+            <version>1.4.1-SNAPSHOT</version>
         </dependency>
 
         <dependency>

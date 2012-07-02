@@ -26,12 +26,11 @@ import org.apache.log4j.Logger;
 import org.atmosphere.cpr.AtmosphereConfig;
 import org.atmosphere.cpr.AtmosphereRequest;
 import org.atmosphere.cpr.AtmosphereResource;
-import org.atmosphere.cpr.AtmosphereResponse;
 import org.atmosphere.cpr.Broadcaster;
 import org.atmosphere.cpr.BroadcasterFactory;
 import org.atmosphere.websocket.WebSocket;
 import org.atmosphere.websocket.WebSocketEventListenerAdapter;
-import org.atmosphere.websocket.WebSocketProcessor.WebSocketException;
+import org.atmosphere.websocket.WebSocketProcessor;
 import org.atmosphere.websocket.WebSocketProtocol;
 
 /**
@@ -49,31 +48,10 @@ public class MyNettosphereWebsocketHandler implements WebSocketProtocol {
     private AtmosphereResource r;
     private final ConcurrentHashMap<String, Future<?>> futures = new ConcurrentHashMap<String, Future<?>>();
 
-    @Override
-    public String handleResponse(AtmosphereResponse response, String message) {
-        logger.info(String.format(
-                "handleResponse(): {IP: %s} : {Port: %s} : {Message: %s}",
-                response.getRequest().getRemoteAddr(), response.getRequest()
-                        .getRemotePort(), message));
-        return message;
-    }
-
-    @Override
-    public byte[] handleResponse(AtmosphereResponse response, byte[] message,
-            int offset, int length) {
-        logger.info(String.format(
-                "handleResponse(): {IP: %s} : {Port: %s} : {Message: %s}",
-                response.getRequest().getRemoteAddr(), response.getRequest()
-                        .getRemotePort(), new String(message)));
-        return new byte[0];
-    }
-
-    @Override
     public void configure(AtmosphereConfig config) {
         logger.info(String.format("configure(): {Config: %s}", config));
     }
 
-    @Override
     public void onOpen(WebSocket webSocket) {
 
         logger.info(String.format(
@@ -111,7 +89,6 @@ public class MyNettosphereWebsocketHandler implements WebSocketProtocol {
         r.suspend(-1);
     }
 
-    @Override
     public List<AtmosphereRequest> onMessage(WebSocket webSocket, String message) {
 
         logger.info(String.format(
@@ -132,14 +109,13 @@ public class MyNettosphereWebsocketHandler implements WebSocketProtocol {
         return null;
     }
 
-    @Override
     public List<AtmosphereRequest> onMessage(WebSocket webSocket,
             byte[] message, int offset, int length) {
         logger.info(String.format(
-                "onMessage(): {IP: %s} : {Port: %s} : {Message: %s}",
-                        webSocket.resource().getRequest().getRemoteAddr(),
-                        webSocket.resource().getRequest().getRequest().getRemotePort(),
-                        new String(message)));
+                "onMessage(): {IP: %s} : {Port: %s} : {Message: %s}", webSocket
+                        .resource().getRequest().getRemoteAddr(), webSocket
+                        .resource().getRequest().getRequest().getRemotePort(),
+                new String(message)));
         return null;
     }
 
@@ -150,13 +126,6 @@ public class MyNettosphereWebsocketHandler implements WebSocketProtocol {
         return b;
     }
 
-    @Override
-    public boolean inspectResponse() {
-        logger.info("inspectResponse():");
-        return false;
-    }
-
-    @Override
     public void onClose(WebSocket webSocket) {
         logger.info(String.format("onClose(): {IP: %s} : {Port: %s}",
                 webSocket.resource().getRequest().getRemoteAddr(),
@@ -164,8 +133,7 @@ public class MyNettosphereWebsocketHandler implements WebSocketProtocol {
         webSocket.resource().resume();
     }
 
-    @Override
-    public void onError(WebSocket webSocket, WebSocketException ex) {
+    public void onError(WebSocket webSocket, WebSocketProcessor.WebSocketException ex) {
         logger.error(String.format(ex.getMessage() + " Status {%s} Message {%s}",
                 webSocket.resource().getResponse().getStatus(),
                 ex.response().getStatusMessage()), ex);
