@@ -47,7 +47,7 @@ public class TestNettosphereClient {
         webSocket.addWebSocketListener(new WebSocketTextListener() {
 
             public void onMessage(String message) {
-                System.out.println("onMessage");
+                System.out.println("onMessage: " + message);
                 response.set(message);
                 l.countDown();
             }

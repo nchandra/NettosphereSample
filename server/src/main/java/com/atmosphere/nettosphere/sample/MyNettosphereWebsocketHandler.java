@@ -62,7 +62,7 @@ public class MyNettosphereWebsocketHandler implements WebSocketProtocol {
         // Accept the handshake by suspending the response.
         r = (AtmosphereResource) webSocket.resource();
 
-        Broadcaster b = lookupBroadcaster(((AtmosphereRequest) r.getRequest())
+        final Broadcaster b = lookupBroadcaster(((AtmosphereRequest) r.getRequest())
                 .getPathInfo());
         r.setBroadcaster(b);
         r.addEventListener(new WebSocketEventListenerAdapter());
@@ -78,7 +78,19 @@ public class MyNettosphereWebsocketHandler implements WebSocketProtocol {
 
                 final Future<?> future = b.scheduleFixedBroadcast(
                         new Callable<String>() {
+
+                            final String path = ((AtmosphereRequest) r.getRequest()).getPathInfo();
+
                             public String call() throws Exception {
+
+                                //Is there a more elegant way?
+                                if(b.getAtmosphereResources().size() == 0) {
+                                    logger.info("No resources attached. Destroying broadcaster.");
+                                    futures.remove(path);
+                                    b.destroy();
+                                    return null;
+                                }
+
                                 return new Date().toString();
                             }
                         }, 2, TimeUnit.SECONDS);
@@ -127,13 +139,14 @@ public class MyNettosphereWebsocketHandler implements WebSocketProtocol {
     }
 
     public void onClose(WebSocket webSocket) {
-        logger.info(String.format("onClose(): {IP: %s} : {Port: %s}",
-                webSocket.resource().getRequest().getRemoteAddr(),
-                webSocket.resource().getRequest().getRemotePort()));
+//        logger.info(String.format("onClose(): {IP: %s} : {Port: %s}",
+//                webSocket.resource().getRequest().getRemoteAddr(),
+//                webSocket.resource().getRequest().getRemotePort()));
         webSocket.resource().resume();
     }
 
     public void onError(WebSocket webSocket, WebSocketProcessor.WebSocketException ex) {
+        System.out.println("Trouble");
         logger.error(String.format(ex.getMessage() + " Status {%s} Message {%s}",
                 webSocket.resource().getResponse().getStatus(),
                 ex.response().getStatusMessage()), ex);
